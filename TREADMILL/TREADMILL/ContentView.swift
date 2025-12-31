@@ -1,55 +1,32 @@
-//
-//  ContentView.swift
-//  TREADMILL
-//
-//  Created by Sulaiman Khydyr uulu on 12/31/25.
-//
 
 import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-    @Environment(\.modelContext) private var modelContext
-    @Query private var items: [Item]
-
     var body: some View {
-        NavigationSplitView {
-            List {
-                ForEach(items) { item in
-                    NavigationLink {
-                        Text("Item at \(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))")
-                    } label: {
-                        Text(item.timestamp, format: Date.FormatStyle(date: .numeric, time: .standard))
-                    }
+        
+        TabView {
+            // Daily Dashboard
+            NavigationStack {
+                VStack {
+                    Image(systemName: "figure.walk.treadmill")
+                        .font(.system(size: 60))
+                        .foregroundStyle(.blue)
+                    Text("Daily Dashboard coming soon!")
+                        .font(.headline)
                 }
-                .onDelete(perform: deleteItems)
+                .navigationTitle("Treadmill")
             }
-            .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    EditButton()
-                }
-                ToolbarItem {
-                    Button(action: addItem) {
-                        Label("Add Item", systemImage: "plus")
-                    }
-                }
+            .tabItem {
+                Label("Daily", systemImage: "list.bullet.clipboard")
             }
-        } detail: {
-            Text("Select an item")
-        }
-    }
 
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(timestamp: Date())
-            modelContext.insert(newItem)
-        }
-    }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            for index in offsets {
-                modelContext.delete(items[index])
+            // The Profile Page we just built
+            NavigationStack {
+                ProfileView()
+            }
+            .tabItem {
+                Label("Profile", systemImage: "person.circle")
             }
         }
     }
@@ -57,5 +34,5 @@ struct ContentView: View {
 
 #Preview {
     ContentView()
-        .modelContainer(for: Item.self, inMemory: true)
+        .modelContainer(for: [UserProfile.self, LongTermGoal.self], inMemory: true)
 }
