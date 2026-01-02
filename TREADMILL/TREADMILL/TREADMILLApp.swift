@@ -14,6 +14,7 @@ struct TREADMILLApp: App {
         let schema = Schema([
             UserProfile.self,
             LongTermGoal.self,
+            DailyGoal.self,
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

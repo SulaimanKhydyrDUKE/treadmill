@@ -27,6 +27,6 @@ struct GoalCardView: View {
     }
 }
 #Preview {
-    GoalCardView(goal: LongTermGoal(title: "Run a Marathon", details: "Complete a full 42km run by the end of the year.", category: "Call"))
+    GoalCardView(goal: LongTermGoal(title: "Run a Marathon", details: "Complete a full 42km run by the end of the year.", category: "Call", ownerID: "String"))
         .modelContainer(for: [UserProfile.self, LongTermGoal.self], inMemory: true)
 }
