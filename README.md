@@ -1,2 +1,2 @@
 # treadmill
-App for keeping on a treadmill with your friends in terms of daily goals. Your friends can follow you and suggest tasks for you. 
+An app for keeping track of your friends' goals and suggest tasks to help them achieve them. 
